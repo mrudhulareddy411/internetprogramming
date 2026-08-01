@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Registration Form Validation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dceeff, #f7fbff);
+        }
+
+        .form-container {
+            width: 90%;
+            max-width: 430px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            margin-top: 0;
+            text-align: center;
+            color: #173b57;
+        }
+
+        .description {
+            margin-bottom: 25px;
+            text-align: center;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #222;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #999;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            border-color: #1769aa;
+            outline: none;
+            box-shadow: 0 0 4px rgba(23, 105, 170, 0.3);
+        }
+
+        .invalid-input {
+            border-color: red;
+        }
+
+        .valid-input {
+            border-color: green;
+        }
+
+        .message {
+            display: block;
+            min-height: 18px;
+            margin-top: 5px;
+            font-size: 13px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .valid {
+            color: green;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1769aa;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #124f80;
+        }
+
+        #successMessage {
+            margin-bottom: 0;
+            text-align: center;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="form-container">
+    <h2>Registration Form</h2>
+
+    <p class="description">
+        Enter a valid name, email address and phone number.
+    </p>
+
+    <form id="registrationForm" novalidate>
+
+        <div class="form-group">
+            <label for="name">Full Name</label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+                autocomplete="name"
+                required
+            >
+
+            <span id="nameMessage" class="message"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="example@gmail.com"
+                autocomplete="email"
+                required
+            >
+
+            <span id="emailMessage" class="message"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Enter 10-digit mobile number"
+                maxlength="10"
+                inputmode="numeric"
+                autocomplete="tel"
+                required
+            >
+
+            <span id="phoneMessage" class="message"></span>
+        </div>
+
+        <button type="submit">Register</button>
+
+        <p id="successMessage"></p>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById("registrationForm");
+
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const phoneInput = document.getElementById("phone");
+
+    const nameMessage = document.getElementById("nameMessage");
+    const emailMessage = document.getElementById("emailMessage");
+    const phoneMessage = document.getElementById("phoneMessage");
+
+    const successMessage =
+        document.getElementById("successMessage");
+
+    // Allows letters and spaces with at least 3 characters
+    const namePattern = /^[A-Za-z ]{3,}$/;
+
+    // Checks username, @ symbol, domain and extension
+    const emailPattern =
+        /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+    // Indian mobile number starting with 6, 7, 8 or 9
+    const phonePattern = /^[6-9][0-9]{9}$/;
+
+    function showError(input, messageElement, message) {
+        input.classList.remove("valid-input");
+        input.classList.add("invalid-input");
+
+        messageElement.textContent = message;
+        messageElement.className = "message error";
+    }
+
+    function showValid(input, messageElement, message) {
+        input.classList.remove("invalid-input");
+        input.classList.add("valid-input");
+
+        messageElement.textContent = message;
+        messageElement.className = "message valid";
+    }
+
+    function validateName() {
+        const name = nameInput.value.trim();
+
+        if (name === "") {
+            showError(
+                nameInput,
+                nameMessage,
+                "Name is required."
+            );
+
+            return false;
+        }
+
+        if (!namePattern.test(name)) {
+            showError(
+                nameInput,
+                nameMessage,
+                "Enter at least 3 letters only."
+            );
+
+            return false;
+        }
+
+        showValid(
+            nameInput,
+            nameMessage,
+            "Valid name."
+        );
+
+        return true;
+    }
+
+    function validateEmail() {
+        const email = emailInput.value.trim();
+
+        if (email === "") {
+            showError(
+                emailInput,
+                emailMessage,
+                "Email address is required."
+            );
+
+            return false;
+        }
+
+        if (!emailPattern.test(email)) {
+            showError(
+                emailInput,
+                emailMessage,
+                "Enter a valid email address."
+            );
+
+            return false;
+        }
+
+        showValid(
+            emailInput,
+            emailMessage,
+            "Valid email address."
+        );
+
+        return true;
+    }
+
+    function validatePhone() {
+        const phone = phoneInput.value.trim();
+
+        if (phone === "") {
+            showError(
+                phoneInput,
+                phoneMessage,
+                "Phone number is required."
+            );
+
+            return false;
+        }
+
+        if (!phonePattern.test(phone)) {
+            showError(
+                phoneInput,
+                phoneMessage,
+                "Enter a valid 10-digit Indian mobile number."
+            );
+
+            return false;
+        }
+
+        showValid(
+            phoneInput,
+            phoneMessage,
+            "Valid phone number."
+        );
+
+        return true;
+    }
+
+    // Allow only numbers in the phone field
+    phoneInput.addEventListener("input", function () {
+        phoneInput.value =
+            phoneInput.value.replace(/[^0-9]/g, "");
+
+        validatePhone();
+        successMessage.textContent = "";
+    });
+
+    // Real-time validation
+    nameInput.addEventListener("input", function () {
+        validateName();
+        successMessage.textContent = "";
+    });
+
+    emailInput.addEventListener("input", function () {
+        validateEmail();
+        successMessage.textContent = "";
+    });
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const nameValid = validateName();
+        const emailValid = validateEmail();
+        const phoneValid = validatePhone();
+
+        if (nameValid && emailValid && phoneValid) {
+            successMessage.textContent =
+                "Registration completed successfully!";
+
+            form.reset();
+
+            nameInput.classList.remove("valid-input");
+            emailInput.classList.remove("valid-input");
+            phoneInput.classList.remove("valid-input");
+
+            nameMessage.textContent = "";
+            emailMessage.textContent = "";
+            phoneMessage.textContent = "";
+        } else {
+            successMessage.textContent = "";
+        }
+    });
+</script>
+
+</body>
+</html>
