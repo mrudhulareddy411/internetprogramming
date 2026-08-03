@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+margin:0;
+font-family:Arial;
+}
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#2c3e50;
+padding:15px;
+}
+.logo{
+color:white;
+font-size:24px;
+font-weight:bold;
+}
+.nav-links{
+display:flex;
+list-style:none;
+}
+.nav-links li{
+margin:0 15px;
+}
+.nav-links a{
+color:white;
+text-decoration:none;
+}
+.menu{
+display:none;
+font-size:28px;
+color:white;
+cursor:pointer;
+}
+@media(max-width:768px){
+.nav-links{
+display:none;
+flex-direction:column;
+width:100%;
+}
+.nav-links.active{
+display:flex;
+}
+.menu{
+display:block;
+}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="logo">ShopEasy</div>
+
+<ul class="nav-links" id="menu">
+<li><a href="#">Home</a></li>
+<li><a href="#">Products</a></li>
+<li><a href="#">Categories</a></li>
+<li><a href="#">Cart</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+
+<div class="menu" onclick="toggleMenu()">☰</div>
+</nav>
+
+<script>
+function toggleMenu(){
+document.getElementById("menu").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
