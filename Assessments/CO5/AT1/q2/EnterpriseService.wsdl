@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions
+    name="EnterpriseService"
+
+    targetNamespace="http://example.com/enterprise"
+
+    xmlns:tns="http://example.com/enterprise"
+
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+
+    xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <!-- ========================= -->
+    <!-- 1. TYPES -->
+    <!-- ========================= -->
+
+    <types>
+
+        <xsd:schema
+            targetNamespace="http://example.com/enterprise">
+
+            <!-- Get Data Request -->
+
+            <xsd:element name="GetDataRequest">
+
+                <xsd:complexType>
+
+                    <xsd:sequence>
+
+                        <xsd:element
+                            name="id"
+                            type="xsd:int"/>
+
+                    </xsd:sequence>
+
+                </xsd:complexType>
+
+            </xsd:element>
+
+
+            <!-- Update Data Request -->
+
+            <xsd:element name="UpdateDataRequest">
+
+                <xsd:complexType>
+
+                    <xsd:sequence>
+
+                        <xsd:element
+                            name="id"
+                            type="xsd:int"/>
+
+                        <xsd:element
+                            name="data"
+                            type="xsd:string"/>
+
+                    </xsd:sequence>
+
+                </xsd:complexType>
+
+            </xsd:element>
+
+        </xsd:schema>
+
+    </types>
+
+
+    <!-- ========================= -->
+    <!-- 2. MESSAGES -->
+    <!-- ========================= -->
+
+    <message name="GetDataRequestMessage">
+
+        <part
+            name="parameters"
+            element="tns:GetDataRequest"/>
+
+    </message>
+
+
+    <message name="GetDataResponseMessage">
+
+        <part
+            name="result"
+            type="xsd:string"/>
+
+    </message>
+
+
+    <message name="UpdateDataRequestMessage">
+
+        <part
+            name="parameters"
+            element="tns:UpdateDataRequest"/>
+
+    </message>
+
+
+    <message name="UpdateDataResponseMessage">
+
+        <part
+            name="result"
+            type="xsd:string"/>
+
+    </message>
+
+
+    <!-- ========================= -->
+    <!-- 3. PORT TYPE -->
+    <!-- ========================= -->
+
+    <portType name="EnterprisePortType">
+
+        <operation name="GetData">
+
+            <input
+                message="tns:GetDataRequestMessage"/>
+
+            <output
+                message="tns:GetDataResponseMessage"/>
+
+        </operation>
+
+
+        <operation name="UpdateData">
+
+            <input
+                message="tns:UpdateDataRequestMessage"/>
+
+            <output
+                message="tns:UpdateDataResponseMessage"/>
+
+        </operation>
+
+    </portType>
+
+
+    <!-- ========================= -->
+    <!-- 4. BINDING -->
+    <!-- ========================= -->
+
+    <binding
+        name="EnterpriseSOAPBinding"
+        type="tns:EnterprisePortType">
+
+        <soap:binding
+            style="document"
+            transport=
+            "http://schemas.xmlsoap.org/soap/http"/>
+
+
+        <operation name="GetData">
+
+            <soap:operation
+                soapAction="GetData"/>
+
+            <input>
+
+                <soap:body
+                    use="literal"/>
+
+            </input>
+
+            <output>
+
+                <soap:body
+                    use="literal"/>
+
+            </output>
+
+        </operation>
+
+
+        <operation name="UpdateData">
+
+            <soap:operation
+                soapAction="UpdateData"/>
+
+            <input>
+
+                <soap:body
+                    use="literal"/>
+
+            </input>
+
+            <output>
+
+                <soap:body
+                    use="literal"/>
+
+            </output>
+
+        </operation>
+
+    </binding>
+
+
+    <!-- ========================= -->
+    <!-- 5. SERVICE -->
+    <!-- ========================= -->
+
+    <service name="EnterpriseService">
+
+        <port
+            name="EnterprisePort"
+            binding="tns:EnterpriseSOAPBinding">
+
+            <soap:address
+                location=
+                "http://localhost:8080/EnterpriseService"/>
+
+        </port>
+
+    </service>
+
+</definitions>
