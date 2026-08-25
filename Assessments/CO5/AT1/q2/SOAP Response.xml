@@ -1,0 +1,17 @@
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ent="http://example.com/enterprise">
+
+    <soap:Body>
+
+        <ent:GetDataResponse>
+
+            <ent:result>
+                ID: 1001, Data: Employee Information
+            </ent:result>
+
+        </ent:GetDataResponse>
+
+    </soap:Body>
+
+</soap:Envelope>
