@@ -1,0 +1,75 @@
+public class SOAPDebugger {
+
+    public static void debug(
+            String endpoint,
+            String namespace,
+            String soapAction) {
+
+        System.out.println(
+            "===== SOAP DEBUGGING ====="
+        );
+
+        // Check Endpoint
+        if (endpoint == null ||
+            endpoint.isEmpty()) {
+
+            System.out.println(
+                "ERROR: Invalid endpoint"
+            );
+
+        } else {
+
+            System.out.println(
+                "Endpoint: " + endpoint
+            );
+        }
+
+
+        // Check Namespace
+        if (namespace == null ||
+            namespace.isEmpty()) {
+
+            System.out.println(
+                "ERROR: Namespace missing"
+            );
+
+        } else {
+
+            System.out.println(
+                "Namespace: " + namespace
+            );
+        }
+
+
+        // Check SOAPAction
+        if (soapAction == null ||
+            soapAction.isEmpty()) {
+
+            System.out.println(
+                "ERROR: SOAPAction missing"
+            );
+
+        } else {
+
+            System.out.println(
+                "SOAPAction: " + soapAction
+            );
+        }
+
+        System.out.println(
+            "SOAP debugging completed."
+        );
+    }
+
+
+    public static void main(String[] args) {
+
+        debug(
+            "http://localhost:8080/EnterpriseService",
+
+            "http://example.com/enterprise",
+
+            "GetData"
+        );
+    }
+}
