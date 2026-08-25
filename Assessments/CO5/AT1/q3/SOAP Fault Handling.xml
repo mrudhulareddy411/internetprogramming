@@ -1,0 +1,32 @@
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+
+    <soap:Body>
+
+        <soap:Fault>
+
+            <faultcode>
+                soap:Server
+            </faultcode>
+
+            <faultstring>
+                Unable to process request
+            </faultstring>
+
+            <detail>
+
+                <ErrorCode>
+                    SERVER001
+                </ErrorCode>
+
+                <Message>
+                    Database connection failed
+                </Message>
+
+            </detail>
+
+        </soap:Fault>
+
+    </soap:Body>
+
+</soap:Envelope>
