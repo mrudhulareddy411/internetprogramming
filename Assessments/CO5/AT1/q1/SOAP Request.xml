@@ -1,0 +1,25 @@
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+
+    <soap:Header>
+        <Authentication>
+            <Token>ABC123XYZ</Token>
+        </Authentication>
+    </soap:Header>
+
+    <soap:Body>
+
+        <addPatient
+            xmlns="http://hospital/">
+
+            <patientId>P1001</patientId>
+            <name>Ravi Kumar</name>
+            <age>45</age>
+            <gender>Male</gender>
+            <phone>9876543210</phone>
+
+        </addPatient>
+
+    </soap:Body>
+
+</soap:Envelope>
