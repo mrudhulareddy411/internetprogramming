@@ -1,0 +1,18 @@
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+
+    <soap:Body>
+
+        <addPatientResponse
+            xmlns="http://hospital/">
+
+            <return>
+                Patient Registered Successfully.
+                Patient ID: P1001
+            </return>
+
+        </addPatientResponse>
+
+    </soap:Body>
+
+</soap:Envelope>
