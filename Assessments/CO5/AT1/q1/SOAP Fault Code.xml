@@ -1,0 +1,18 @@
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+
+    <soap:Body>
+
+        <soap:Fault>
+
+            <faultcode>soap:Client</faultcode>
+
+            <faultstring>
+                Invalid Patient ID
+            </faultstring>
+
+        </soap:Fault>
+
+    </soap:Body>
+
+</soap:Envelope>
